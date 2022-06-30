@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1"><!---edit for mobile compatible-->
+<title>
+* Keep-Off-For
+</title>
+</head>
+<body bgcolor="#e7f5f5">
+<form action="/a1" method="post" >
+<fieldset style="border-radius:5px;margin-top:5%;background-color:#d9f4fc">
+<div style="display:block;margin-left: auto;
+  margin-right: auto; width:145px">
+<legend style="font-size:18px;font-style:bold">Keep-Off-For
+  <input type="submit" style="font-size:14px; border-radius:8px; border-color:#2e0000;background-color:#fbeaf2"value="{o}"></input></legend></div>
+  </fieldset>
+  <fieldset style="margin-top:1%;background-color:#fceaea">
+<div style="display: block;
+	background-color:#e8c1e8;
+	color:#002e00;
+  margin-left: auto;
+  margin-right: auto;
+  width: 115px;padding:8px;border-radius:3px">
+  <label>from</label>
+  <input list="selF" maxlength="3"name="from1" id="fromIP"style="width:48px;" placeholder="00"></input>
+<datalist id="selF" >
+<option value=0.0></option>
+<option value=0.3></option>
+<option value=1.0></option>
+<option value=1.3></option>
+<option value=2.0></option>
+<option value=2.3></option>
+<option value=3.0></option>
+<option value=4.0></option>
+</datalist>
+<button id="from"style="color:#ffe552; background-color:#d600d6"><
+</button>
+</div>
+<div style="margin-left: auto;
+  margin-right: auto; border-radius:15px; width:230px; background-color:#969696 ; margin-top:7px">
+<div style="border-radius:15px; width:10%; background-color:#52ff52; color:#52ff52">.
+</div>
+</div>
+<div style="display: block;
+	background-color:#eadbc8;
+	color:#002e00;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;padding:3px;margin-top:7px">
+  <label>for</label>
+  <input list="forL" name="for2" id="forIP"style="width:48px;" placeholder="00"></input>
+<datalist id="forL" >
+<option value=8.0></option>
+<option value=7.0></option>
+<option value=6.0></option>
+<option value=1.3></option>
+<option value=2.0></option>
+<option value=2.3></option>
+<option value=3.0></option>
+<option value=4.0></option>
+</datalist>
+<button id="from"style="color:#ebebeb; background-color:#00d6d6">>
+</button>
+</div>
+</input>
+</fieldset>
+<input type="time" name="Time" id="T"></input>
+<script>
+var a= new  Date();
+document.getElementById("T").value = a.getHours()+":"+a.getMinutes();
+</script>
+</form>
+</body>
+</html>
