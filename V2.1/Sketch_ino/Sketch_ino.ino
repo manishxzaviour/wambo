@@ -11,7 +11,6 @@ IPAddress subnet(255, 255, 0, 0);
 String ssid     = "M 2.4G ";
 String password = "helloWorld11";
 ESP8266WebServer server(80);
-
 void wifi(){
 	WiFi.config(staticIP,staticIP,subnet);
 	WiFi.begin(ssid,password);
@@ -41,8 +40,21 @@ void hNF(){
 	server.send(200,"text/html","404:FNF");
 }
 void handleRequest(){
-  server.begin();
+    server.begin();
 	server.on("/",hIndex);
+	server.on("/sm/",hSM);
+	server.on("/abt/",hAbt);
+	server.on("/raw/",hRaw);
+	server.on("/raw/tonn",hRawOn);
+	server.on("/raw/toff",hRawOff);
+	server.on("/raw/tempr",hRawTemp);
+	server.on("/msg/",hMsg);
+	server.on("/msg/a",hMsgGot);
+	server.on("/wambo",hGot);
+	server.on("/report/",hReport);
+	server.on("/fromp/",hFromP);
+	server.on("/upd/",hUpd);
+	server.on("/upd/a",hUpdGot);
 	server.onNotFound(hNF);
 }
 void setup() { 
