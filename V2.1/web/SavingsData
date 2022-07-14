@@ -1,0 +1,4 @@
+var savingsD=[['Jan-Feb', 55,24],['Mar-Apr', 49,22],['May-Jun', 44,20.9],['Jul-Aug', 24,19],['Sep-Oct', 15,18],['Nov-Dec', 55,24],];
+export default savingsD;
+
+// two month period data calculation

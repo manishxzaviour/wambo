@@ -1,0 +1,30 @@
+<html>
+<head>
+<style>
+.container {
+  border: 1px solid #666;
+  width: 1000px;
+  height: 400px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.big-element {
+  width: 1500px;
+  height: 400px;
+  background: linear-gradient(to right, #AAA, #CCC);
+}
+</style>
+</head>
+<body>
+<script>
+const container = document.querySelector('.container');
+const bigel = document.querySelector('.big-element');
+container.scrollLeft=900;
+</script>
+<div class="container">
+  <div class="big-element"></div>
+</div>
+
+</body>
+</html>

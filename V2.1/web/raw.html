@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>
+Raw
+</title>
+<style>
+.frame{border:3px dotted white;}
+</style>
+<link rel="stylesheet" type="text/css" href="index.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&family=Rubik:wght@300&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="hdder">
+	<h2 class="hdderWrapper">WamBo</h2>
+	</div>
+	<br>
+	<br>
+	<br>
+	<p>
+		<em><h3 class="shadowLight genericText">RAW Data</h3></em>
+	</p>
+	<p align="center">
+		<frameset cols="3">
+			<iframe src="/raw/data" title="data" width="85%" height="50%" id="ton" class="shadowLight frame"></iframe>
+		</frameset>
+	</p>
+	<i align="right"><h5 id="info" class="shadowLight genericText">INFO</h5></i>
+<script lang="javascript">
+var  ton= document.getElementById("ton");
+ton.onmouseover= function(){over1()};
+ton.onmouseout= function(){out()};
+var  toff= document.getElementById("toff");
+toff.onmouseover= function(){over2()};
+toff.onmouseout= function(){out()};
+function over1(){
+info.textContent="ton";
+}
+function out(){
+info.textContent="INFO";
+}
+function over2(){
+info.textContent="toff";
+}
+</script>
+<body>
+</body>
+</html>

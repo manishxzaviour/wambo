@@ -1,0 +1,101 @@
+<html>
+<!--
+set from
+set till
+throught a tag
+store power saved in rupees based on input field  
+store editable message onboard
+phone compatible 
+auto disconnect based on schedule no exact shut off buffer of 1 hours
+sitemap 
+flash update
+schedule table 
+TIME  ok
+-->
+	<head>
+		<title>wambo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1"><!---edit for mobile compatible-->
+	</head>
+	<body>
+		<h2 id="hdder" align="center">Wam_Bo</h2>
+		<br><br>
+		<ul id="title">
+				<li><a href="/sm">SiteMap</a></li>
+				<li><a href='/abt'><image href="#" id="logo"  alt="logo"/></li>
+		</ul>
+		<ul id="subt">
+				<li><a href="/raw">RAW</a></li>
+				<li><a id="msg" href="#"><image href="#" id="msg_i" alt="stored memo"></image></a></li>
+				<li><a id="update" href="/a/update/"><image href="#" id="update" alt="flash update" /></a></li>
+		</ul>
+		<form>
+				<table id="input" border="1px">
+					<tr>
+						<th>
+						 <input list="selF" type="text" maxlength="3"name="*from1" id="from" style="width:50%;" placeholder="0.0" value="0.0">
+							<datalist id="selF" >
+							<option value=0.0></option>
+							<option value=0.3></option>
+							<option value=1.0></option>
+							<option value=1.3></option>
+							<option value=2.0></option>
+							<option value=2.3></option>
+							<option value=3.0></option>
+							<option value=4.0></option>
+							<option value=6.0></option>
+							<option value=7.0></option>
+							<option value=8.0></option>
+							<option value=10.0></option>
+							</datalist>
+					</th></tr>
+					<tr><td>&nbsp;</td><td><input type="submit"  value="&nbsp;&nbsp;&nbsp;>>&nbsp;&nbsp;&nbsp;" id="send"></td></tr>
+					<tr><th><input list="selF" type="text"name="*till1"  id="till" placeholder="8.0" maxlength="3" style="width:50%;" value="8.0"></th></tr>
+				</table>
+				<table border="3px" border-color="silver">
+					<th>Schedule</th>
+							<tr><td></td><td id="day" style="text-align:center">Mon</td></tr>
+							<tr><td>4_6</td><td class="sced"><p id="4_6">***************</p></td></tr>
+							<tr><td>6_8</td><td class="sced"><p id="6_8" >***************</p></td></tr>
+							<tr><td>8_10</td><td class="sced"><p id="8_10">***************</p></td></tr>
+							<tr><td>10_12</td><td class="sced"><p id="10_12">***************</p></td></tr>
+							<tr><td>12_14</td><td class="sced"><p id="12_14">***************</p></td></tr>
+							<tr><td>14_16</td><td class="sced"><p id="14_16">***************</p></td><td><a href="/a/sced/upd">UPDATE</a></td></tr>
+							<tr><td>16_18</td><td class="sced"><p id="16_18">***************</p></td></tr>
+							<tr><td>18_20</td><td class="sced"><p id="18_20">***************</p></td></tr>
+							<tr><td>20_22</td><td class="sced"><p id="20_22">***************</p></td></tr>
+							<tr><td>22_24</td><td class="sced"><p id="22_24">***************</p></td></tr>
+							<tr><td>24_2</td><td class="sced"><p id="24_2">***************</p></tr>
+				</table>
+				<input id="time" type="text" >
+		</form>
+		<iframe src="/report/" title="report" height="300px" width="400px" style="border:3px solid silver;" id="rep"></iframe>
+		<script language="javascript">
+			var  dateTime= new Date();
+			document.getElementById("time").value=dateTime;
+			function refT() {
+						var ref=new Date();
+						document.getElementById("time").value=ref;
+			}
+			 setInterval(refT,1000);
+			 var sendB=document.getElementById("send");
+			 function sendC(){	
+			 document.getElementById("input").style="background-color:#00ff00";
+			 }
+			 sendB.onclick = function(){sendC()};
+			 var frm=document.getElementById("from");
+			 var till=document.getElementById("till");
+			 function check(){
+			 }
+			 frm.onfocus=function(){
+			 frm.value='';
+			 check();
+			 }
+			 till.onfocus=function(){
+			 till.value='';
+			 check();
+			 }
+			 var pse=document.getElementById("pause1");
+			 pse.onclick=function(){pse.style="background-color: yellow;";}
+		</script>
+	</body>
+</html>
