@@ -15,8 +15,9 @@
 	<p class="genericText">
 		<em><h3>Update</h3></em>
 	</p>
-	<form action="/upd/a" method="post"><table border="3px" border-color="silver" align="center" class="genericText shadowLight">
-							<tr><td><input type="button" id="rst" value="RESET" onclick="rst();"></td><td id="day" style="text-align:center">Schedule</td></tr>
+	<form action="/upd/a" method="post">
+	<table border="3px" border-color="silver" align="center" class="genericText shadowLight">
+							<tr><td><input type="button" id="rst" value="RESET"></td><td id="day" style="text-align:center">Schedule</td></tr>
 							<tr><td>4_6</td><td class="sced"><input type="text" value="***************" id="4_6"  name="4_6"><td><input type="button" value="^" id="u4_6"></td></td></tr>
 							<tr><td>6_8</td><td class="sced"><input type="text" value="***************" id="6_8" name="6_8"><td><input type="button" value="^" id="u6_8"></td></td></tr>
 							<tr><td>8_10</td><td class="sced"><input type="text" value="***************" id="8_10" name="8_10"><td><input type="button" value="^" id="u8_10"></td></td></td></tr>
@@ -31,10 +32,12 @@
 		        </table>
 				<div class="hdderWrapper genericText shadowLight">
 				<input type="text" name="*Check" id="x" style="display:none" value="0000">
-				<input type="text" placeholder="Price per KwH" name="ElecticPrice" onchange="ud()">
+				<input type="text" placeholder="Price per KwH" name="ElectricPrice" onchange="ud()" id="price">
+				<input type="text" placeholder="supply Ampere" name="ElectricSupply" onchange="ud()" id="suply">
 				<br>
 				<br>
 				<input type="text" id="ssid" placeholder="SSID"name="SSID" onchange="ud()"><input type="text" id="pwd"placeholder="Password" name="PWD" onchange="ud()">
+				<br>
 				<br>
 				<br>
 				<label>Reset?&nbsp;&nbsp;</label>Y:<input type="radio" name="reset" value="Yes">N:<input type="radio" name="reset" value="No" checked>
@@ -72,6 +75,13 @@
 			 document.getElementById("rst").onclick=function(){rst();};
 			 function ud(){
 				 document.getElementById("x").value="1111";
+				 var x=document.getElementById("price");
+				 var y=document.getElementById("suply");
+				 if(isNaN(parseFloat(x.value))||isNaN(parseFloat(y.value))){
+					alert("input should be a number; electricity");
+					x.value=null;
+					y.value=null;
+				}
 			 }
 			 var SSID_I=document.getElementById("ssid");
 			 var PWD_I=document.getElementById("pwd");
