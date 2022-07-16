@@ -1,4 +1,4 @@
-{//header
+//header
 #include <FS.h>
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
@@ -6,8 +6,8 @@
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
-}
-{//global var
+
+//global var
 IPAddress staticIP(192, 168, 0, 184);
 IPAddress subnet(255, 255, 0, 0);
 String ssid     = "M 2.4G ";
@@ -23,7 +23,7 @@ float For;
 int T = 0; //h*24*60*60*1000+m*60*1000
 String GotData;
 ESP8266WebServer server(80);
-}
+
 void Blink(){
   digitalWrite(led,   HIGH);   
   delay(500);                       
@@ -111,15 +111,11 @@ void hAbt(){
 	Serial.println("abt");
 }
 void hRaw(){
-	rFile("/raw.html",0);
-	Serial.println("raw");
-}
-void hRawData(){// handle raw sub may be xml?
 	rFile("/Data.xml",3);
-	Serial.println("RData");
+  Serial.println("RData");
 }
 void hMsg(){
-	rFile("/memmo.html",0);
+	rFile("/Memmo.html",0);
 	Serial.println("memmo");
 }
 void hMsgGot(){ // msg got  write to a xml and view it ?
@@ -138,6 +134,9 @@ void hGot(){
     rFile("/Ok.html",0);
     from = GotData.substring(GotData.indexOf("1=") + 2, GotData.indexOf("&")).toFloat(); //from1=00&for2=00
     For = GotData.substring(GotData.indexOf("2=") + 2, GotData.indexOf("&T")).toFloat();  //from1=0.0&for2=8.0&Time
+    // handle date as well
+    //from1=0.0&for2=8.0&t*=Fri+Jul+15+2022+14%3A11%3A57
+    // Fri Jul 15 2022 14:16:58 : %3A
     Serial.println(GotData);
      delay(1000);
     set();
@@ -147,7 +146,8 @@ void hReport(){
 	rFile("/Report.html",0);
 	Serial.println("Report");
 }
-void hReportGot(){// handle report got
+void hReportGot(){ // handle weather
+  
 }
 void hFromP(){
 	rFile("/FromP.html",0);
@@ -163,7 +163,7 @@ void hCss(){
 	Serial.println("css");
 }
 void hProgCss(){
-	rFile("/Prog.css",0);
+	rFile("/Prog.css",1);
 }
 void hSced(){
 	rFile("/Sced.js",2);
@@ -183,12 +183,11 @@ void handleRequest(){
 	server.on("/sm/",hSM);
 	server.on("/abt/",hAbt);
 	server.on("/raw/",hRaw);
-	server.on("/raw/data",hRawData);
 	server.on("/msg/",hMsg);
 	server.on("/msg/a",hMsgGot);
 	server.on("/wambo",hGot);
 	server.on("/report/",hReport);
-	server.on("/report/a",hReportGot);
+  server.on("/ref",hReportGot);
 	server.on("/fromp/",hFromP);
 	server.on("/upd/",hUpd);
 	server.on("/css",hCss);

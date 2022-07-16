@@ -20,7 +20,7 @@ MeMMo
 </button>
 </p>
 </div>
-<textarea class="genericText" name="memmo" rows="10" cols="100" placeholder="Write your notes here">
+<textarea class="genericText" name="memmo" rows="10" cols="100" placeholder="Write your notes here" id="memmo">
 </textarea>
 </form>
 <script>
@@ -29,6 +29,14 @@ let v="font-size:30px;font-family:'Pacifico', cursive;background-color:rgba(240,
 x.style=v;
 x.onmouseover=function(){x.style="border:4px dotted gray;"+v}
 x.onmouseout=function(){x.style=v}
+var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("memmo").innerHTML=this.responseText;
+    }
+  };
+  xmlhttp.open("GET", "/memmo", true);
+  xmlhttp.send();
 </script>
 </body>
 </html>

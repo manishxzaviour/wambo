@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-	<D14072022>
+	<D>
 		<from>1</from>
 		<for>8</for>
-		<temp>28</temp>
 		<ton>16</ton>
 		<toff>13</toff>
 		<rate>5</rate>
@@ -11,11 +10,10 @@
 		<savedE>2</savedE>
 		<savedM>20</savedM>
 		<date>14-07-2022</date>
-	</D14072022>
-	<D15072022>
+	</D>
+	<D>
 		<from>3</from>
 		<for>4</for>
-		<temp>20</temp>
 		<ton>18</ton>
 		<toff>24</toff>
 		<rate>5</rate>
@@ -23,11 +21,10 @@
 		<savedE>22</savedE>
 		<savedM>20</savedM>
 		<date>15-07-2022</date>
-	</D15072022>
-	<D16072022>
+	</D>
+	<D>
 		<from>0.2</from>
 		<for>8</for>
-		<temp>24</temp>
 		<ton>14</ton>
 		<toff>18</toff>
 		<rate>5</rate>
@@ -35,5 +32,71 @@
 		<savedE>2</savedE>
 		<savedM>20</savedM>
 		<date>16-07-2022</date>
-	</D16072022>
+	</D>
+	<D>
+		<from>3</from>
+		<for>3</for>
+		<ton>12</ton>
+		<toff>12</toff>
+		<rate>5</rate>
+		<supply>10</supply>
+		<savedE>3</savedE>
+		<savedM>20</savedM>
+		<date>17-07-2022</date>
+	</D>
+	<D>
+		<from>2.2</from>
+		<for>3</for>
+		<ton>10</ton>
+		<toff>14</toff>
+		<rate>5</rate>
+		<supply>10</supply>
+		<savedE>20</savedE>
+		<savedM>50</savedM>
+		<date>18-07-2022</date>
+	</D>
+	<D>
+		<from>1.3</from>
+		<for>8</for>
+		<ton>14</ton>
+		<toff>18</toff>
+		<rate>5</rate>
+		<supply>10</supply>
+		<savedE>2</savedE>
+		<savedM>20</savedM>
+		<date>19-07-2022</date>
+	</D>
+	<D>
+		<from>5</from>
+		<for>2</for>
+		<ton>16</ton>
+		<toff>8</toff>
+		<rate>5</rate>
+		<supply>10</supply>
+		<savedE>20</savedE>
+		<savedM>100</savedM>
+		<date>20-07-2022</date>
+	</D>
+	<D>
+		<from>0.2</from>
+		<for>8</for>
+		<ton>14</ton>
+		<toff>18</toff>
+		<rate>5</rate>
+		<supply>10</supply>
+		<savedE>2</savedE>
+		<savedM>20</savedM>
+		<date>21-07-2022</date>
+	</D>
+	<D>
+		<from>1</from>
+		<for>1</for>
+		<ton>8</ton>
+		<toff>16</toff>
+		<rate>5</rate>
+		<supply>10</supply>
+		<savedE>2</savedE>
+		<savedM>10</savedM>
+		<date>22-07-2022</date>
+	</D>
 </data>

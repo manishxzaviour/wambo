@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script type="module" src="viz.js" async></script>
+		<script type="module" src="tontoff.js" async></script>
+		<script type="module" src="ElectData.js" async></script>
+		<script type="module" src="UsageData.js" async></script>
+		<script type="module" src="SavingsData.js" async></script>
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,36 +47,21 @@
 			google.charts.setOnLoadCallback(drawScatter);	
 			google.charts.setOnLoadCallback(drawBar);
 			function drawPie(){
-				var onT=16;
-				var offT=8;
+				var pieOpt= {
+					title:'Distribution',
+					is3D:true
+				};
+				var  pie = new google.visualization.PieChart(document.getElementById('d1'));
 				var pieD = google.visualization.arrayToDataTable([
 						['distribution','duration'],
-						['onTime', onT],
-						['offTime',offT],
+						['onTime', Data.onT],
+						['offTime', Data.offT]
 					]);
-					var pieOpt= {
-						title:'Distribution',
-						is3D:true
-					};
-						var  pie = new google.visualization.PieChart(document.getElementById('d1'));
-						pie.draw(pieD, pieOpt);	
+				pie.draw(pieD, pieOpt);	
 			}
-			var EleD=[
-						['wh', 'period'],
-						[50,7],[60,8],[70,8],[80,9],[90,9],[100,9],
-						[110,10],[120,11],[130,14],[140,14],[150,15]];
-			var UsageD=[['Activation-Time', 'Day'],
-						[50,7],[60,8],[70,8],[80,9],[90,9],[100,9],
-						[110,10],[120,11],[130,14],[140,14],[150,15]];
-			var SavingsD=[['Month', 'Savings in wH','Temperature(Avg)'],
-						['Italy', 55,24],
-						['France', 49,22],
-						['Spain', 44,20.9],
-						['USA', 24,19],
-						['Argentina', 15,18]
-						];
+			
 			function drawLine(){
-				var lineD = google.visualization.arrayToDataTable(EleD);
+				var lineD = google.visualization.arrayToDataTable(Data.EleD);
 					var  lineOpt = {
   						title: 'Electricity saved vs offTime',
 						hAxis: {title: 'Period-Day'},
@@ -82,7 +72,7 @@
 				line.draw(lineD, lineOpt);
 			}
 			function drawScatter(){
-				var pointD = google.visualization.arrayToDataTable(UsageD);
+				var pointD = google.visualization.arrayToDataTable(Data.UsageD);
 					var  pointOpt = {
   						title: 'Activation-Time vs Day',
 						hAxis: {title: 'Period-Day'},
@@ -93,7 +83,7 @@
 				point.draw(pointD, pointOpt);	
 			}
 			function drawBar(){
-				var barD = google.visualization.arrayToDataTable(SavingsD);
+				var barD = google.visualization.arrayToDataTable(Data.SavingsD);
 						var barOpt = {
 							title: 'Savings'
 						};
@@ -120,7 +110,7 @@
 			try{$.get(wetherPune, function(data, status){
 					wetherD=JSON.stringify(data);
 					console.log("Data: " + wetherD + "\nStatus: " + status);
-					format()	;
+					format();
 					send();
 			});}
 			catch(err){
@@ -134,8 +124,7 @@
 						console.log(this.responseText);
 					}
 				};
-				xhttp.open("POST", "\report\temp", true);
-				xhttp.send(wetherDF);
+				xhttp.open("POST", "\report\a", true);
 				xhttp.send(wetherDF);
 			}
 			function format(){
@@ -154,8 +143,8 @@
 				for(let i=0;i<=wetherDF.length;i++){
 					let a=[];
 					let b=String(wetherDF[i]);
-a.push(b.slice(b.indexOf("\"startTime\":\"")+13,b.indexOf("\",\"")-10)); 
-a.push(b.slice(b.indexOf("\"temperature\":")+14,b.indexOf("}}"))); 
+					a.push(b.slice(b.indexOf("\"startTime\":\"")+13,b.indexOf("\",\"")-10)); 
+					a.push(b.slice(b.indexOf("\"temperature\":")+14,b.indexOf("}}"))); 
 					tempDF.push(a);
 				}
 				tempDF.pop("['', '{v:}']")
