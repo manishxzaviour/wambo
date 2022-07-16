@@ -17,18 +17,17 @@
 	</p>
 	<form action="/upd/a" method="post">
 	<table border="3px" border-color="silver" align="center" class="genericText shadowLight">
-							<tr><td><input type="button" id="rst" value="RESET"></td><td id="day" style="text-align:center">Schedule</td></tr>
-							<tr><td>4_6</td><td class="sced"><input type="text" value="***************" id="4_6"  name="4_6"><td><input type="button" value="^" id="u4_6"></td></td></tr>
-							<tr><td>6_8</td><td class="sced"><input type="text" value="***************" id="6_8" name="6_8"><td><input type="button" value="^" id="u6_8"></td></td></tr>
-							<tr><td>8_10</td><td class="sced"><input type="text" value="***************" id="8_10" name="8_10"><td><input type="button" value="^" id="u8_10"></td></td></td></tr>
-							<tr><td>10_12</td><td class="sced"><input type="text" value="***************" id="10_12" name="10_12"><td><input type="button" value="^" id="u10_12"></td></td></tr>
-							<tr><td>12_14</td><td class="sced"><input type="text" value="***************" id="12_14" name="12_14"><td><input type="button" value="^" id="u12_14"></td></td></tr>
-							<tr><td>14_16</td><td class="sced"><input type="text" value="***************" id="14_16" name="14_16"><td><input type="button" value="^" id="u14_16"></td></td><td><input type="submit" value="UPDATE" id="upd" name="*upd"></td></tr>
-							<form><tr><td>16_18</td><td class="sced"><input type="text" value="***************" id="16_18" name="16_18"></td><td><input type="button" value="^" id="u16_18"></td><td><input type="submit" value="PAUSE" id="pus" name="*pause"></td></tr></form>
-							<tr><td>18_20</td><td class="sced"><input type="text" value="***************" id="18_20" name="18_20"><td><input type="button" value="^" id="u18_20"></td></td></tr>
-							<tr><td>20_22</td><td class="sced"><input type="text" value="***************" id="20_22" name="20_22"><td><input type="button" value="^" id="u20_22"></td></td></tr>
-							<tr><td>22_24</td><td class="sced"><input type="text" value="***************" id="22_24" name="22_24"><td><input type="button" value="^" id="u22_24"></td></td></tr>
-							<tr><td>24_2</td><td class="sced"><input type="text" value="***************" id="24_2" name="24_2"><td><input type="button" value="^" id="u24_2"></td></td></tr>
+							<tr><td><input type="button" id="rst" value="RESET"></td><td id="day" style="text-align:center">On?</td></tr>
+							<tr><td>04_06</td><td class="sced"><input type="checkbox"  id="4_6"  name="04_06"></td></tr>
+							<tr><td>06_08</td><td class="sced"><input type="checkbox"  id="6_8" name="06_08"></td></td></tr>
+							<tr><td>08_10</td><td class="sced"><input type="checkbox"  id="8_10" name="08_10"></td></td></td></tr>
+							<tr><td>10_12</td><td class="sced"><input type="checkbox"  id="10_12" name="10_12"></td></tr>
+							<tr><td>12_14</td><td class="sced"><input type="checkbox"  id="12_14" name="12_14"></td></tr>
+							<tr><td>14_16</td><td class="sced"><input type="checkbox"  id="14_16" name="14_16"></td><td><input type="submit" value="UPDATE" id="upd" name="*upd"></td></tr>
+							<tr><td>16_18</td><td class="sced"><input type="checkbox"  id="16_18" name="16_18"></td></tr>							<tr><td>18_20</td><td class="sced"><input type="checkbox"  id="18_20" name="18_20"></td></tr>
+							<tr><td>20_22</td><td class="sced"><input type="checkbox"  id="20_22" name="20_22"></td></tr>
+							<tr><td>22_24</td><td class="sced"><input type="checkbox"  id="22_24" name="22_24"></td></tr>
+							<tr><td>24_02</td><td class="sced"><input type="checkbox"  id="24_2" name="24_02"></td></tr>
 		        </table>
 				<div class="hdderWrapper genericText shadowLight">
 				<input type="text" name="*Check" id="x" style="display:none" value="0000">
@@ -45,33 +44,19 @@
 	</form>
 	</div>
 		<script lang="javascript">
-		function updt(a){
-				a.value=prompt("two hours scedule","***************");
-			 }
 			 function rst(){
-			 document.getElementById("4_6").value="***************";
-			 document.getElementById("6_8").value="***************";
-			 document.getElementById("8_10").value="***************";
-			 document.getElementById("10_12").value="***************";
-			 document.getElementById("12_14").value="***************";
-			 document.getElementById("14_16").value="***************";
-			 document.getElementById("16_18").value="***************";
-			 document.getElementById("18_20").value="***************";
-			 document.getElementById("20_22").value="***************";
-			 document.getElementById("22_24").value="***************";
-			 document.getElementById("24_2").value="***************";
+			 document.getElementById("4_6").checked=false;
+			 document.getElementById("6_8").checked=false;
+			 document.getElementById("8_10").checked=false;
+			 document.getElementById("10_12").checked=false;
+			 document.getElementById("12_14").checked=false;
+			 document.getElementById("14_16").checked=false;
+			 document.getElementById("16_18").checked=false;
+			 document.getElementById("18_20").checked=false;
+			 document.getElementById("20_22").checked=false;
+			 document.getElementById("22_24").checked=false;
+			 document.getElementById("24_2").checked=false;
 			 }
-			 document.getElementById("u4_6").onclick=function(){updt(document.getElementById("4_6"));};
-			 document.getElementById("u6_8").onclick=function(){updt(document.getElementById("6_8"));};
-			 document.getElementById("u8_10").onclick=function(){updt(document.getElementById("8_10"));};
-			 document.getElementById("u10_12").onclick=function(){updt(document.getElementById("10_12"));};
-			 document.getElementById("u12_14").onclick=function(){updt(document.getElementById("12_14"));};
-			 document.getElementById("u14_16").onclick=function(){updt(document.getElementById("14_16"));};
-			 document.getElementById("u16_18").onclick=function(){updt(document.getElementById("16_18"));};
-			 document.getElementById("u18_20").onclick=function(){updt(document.getElementById("18_20"));};
-			 document.getElementById("u20_22").onclick=function(){updt(document.getElementById("20_22"));};
-			 document.getElementById("u22_24").onclick=function(){updt(document.getElementById("22_24"));};
-			 document.getElementById("u24_2").onclick=function(){updt(document.getElementById("24_2"));};
 			 document.getElementById("rst").onclick=function(){rst();};
 			 function ud(){
 				 document.getElementById("x").value="1111";

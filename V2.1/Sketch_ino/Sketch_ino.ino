@@ -1,13 +1,14 @@
-//header
-#include <FS.h>
-#include <ESP8266WiFi.h>
-#include <WiFiClient.h>
-#include <ESP8266WebServer.h>
-#include <ESP8266mDNS.h>
-#include <WiFiUdp.h>
-#include <ArduinoOTA.h>
+{//header
+	#include <FS.h>
+	#include <ESP8266WiFi.h>
+	#include <WiFiClient.h>
+	#include <ESP8266WebServer.h>
+	#include <ESP8266mDNS.h>
+	#include <WiFiUdp.h>
+	#include <ArduinoOTA.h>
+}
 
-//global var
+{//global var
 IPAddress staticIP(192, 168, 0, 184);
 IPAddress subnet(255, 255, 0, 0);
 String ssid     = "M 2.4G ";
@@ -22,7 +23,7 @@ float from;
 float For;
 int T = 0; //h*24*60*60*1000+m*60*1000
 String GotData;
-ESP8266WebServer server(80);
+ESP8266WebServer server(80);}
 
 void Blink(){
   digitalWrite(led,   HIGH);   
@@ -71,7 +72,7 @@ void ota(){
   });
   ArduinoOTA.begin();
 }
-void rFile(char* f,int a){   //file name  0,1,2,3 <html,css,js,xml>
+void rFile(char* f,int a){   //file name  0,1,2,3,4 <html,css,js,xml,text>
 	  File file = SPIFFS.open(f, "r");
 	  if (file){
   String s;
@@ -91,6 +92,9 @@ void rFile(char* f,int a){   //file name  0,1,2,3 <html,css,js,xml>
 	case 3:
 		server.send(200, "text/xml", s);
 		break;
+	case 4:
+		server.send(200, "text/plain", s);
+		break;
   }
   }
   else {
@@ -102,6 +106,13 @@ void hIndex(){
 	Blink();
 	Serial.println("Index");
 }
+void hIndexJs(){
+	rFile("/index.js",2);
+}
+void hScedJs(){
+	rFile("/Sced.js",2);
+}
+
 void hSM(){
 	rFile("/map.html",0);
 	Serial.println("SM");
@@ -119,6 +130,9 @@ void hMsg(){
 	Serial.println("memmo");
 }
 void hMsgGot(){ // msg got  write to a xml and view it ?
+}
+void hMsgC(){
+	rFile("/memmo.txt",4);
 }
 void set(){ // handle set pause and resume function
 }
@@ -145,6 +159,21 @@ void hGot(){
 void hReport(){
 	rFile("/Report.html",0);
 	Serial.println("Report");
+}
+void hTonToff(){
+	rFile("/tontoff.js",2);
+}
+void hUsageData(){
+	rFile("/UsageData.js",2);
+}
+void hSavingsData(){
+	rFile("/SavingsData.js",2);
+}
+void hSend(){
+	rFile("/send.js",2);
+}
+void hDraw(){
+	rFile("/draw.js",2);
 }
 void hReportGot(){ // handle weather
   
@@ -180,14 +209,22 @@ void hNF(){
 void handleRequest(){
     server.begin();
 	server.on("/",hIndex);
+	server.on("/indexjs",hIndexJs);
+	server.on("/Sced",hScedJS);
 	server.on("/sm/",hSM);
 	server.on("/abt/",hAbt);
 	server.on("/raw/",hRaw);
 	server.on("/msg/",hMsg);
 	server.on("/msg/a",hMsgGot);
+	server.on("/memmo",hMsgC);
 	server.on("/wambo",hGot);
 	server.on("/report/",hReport);
-  server.on("/ref",hReportGot);
+	server.on("/tontoff",hTonToff);
+	server.on("/UsageData",hUsageData);
+	server.on("/SavingsData",hSavingsData);
+	server.on("/draw",hDraw);
+	server.on("/send",hSend);
+  	server.on("/ref",hReportGot);
 	server.on("/fromp/",hFromP);
 	server.on("/upd/",hUpd);
 	server.on("/css",hCss);
