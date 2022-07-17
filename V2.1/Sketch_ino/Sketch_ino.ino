@@ -14,7 +14,7 @@ const char* ssid_ap   = "Wambo_ap";
 const int pin = 5 ;
 const int btn = 14;
 const int led =12;
-float RemT = 100;
+float RemT = 0;
 double CT = millis();
 float from;
 float For;
@@ -115,7 +115,7 @@ void rFile(char* f,int a){   //file name  0,1,2,3,4 <html,css,js,xml,text>
       server.send(200, "text/html", "Error: File does not exist");
   }
 }
-void wFile(int m, String d){	// write file f d 0,1,3 xml txt css js
+void wFile(int m, String d){	// write file f d 0,1,2, xml txt js
 	switch (m){
   case 0:
     {
@@ -141,12 +141,6 @@ void wFile(int m, String d){	// write file f d 0,1,3 xml txt css js
     file.close();
     break;}
 	case 2:
-	  {File file = SPIFFS.open("/Prog.css", "w");
-	  file.print(".fp{width:");
-	  file.print(d);
-	  file.print("%;height:100%;}");
-		break;}
-	case 3:
 	  {File file = SPIFFS.open("/Sced.js", "w");
 	  file.print("var scedule=[");
     for(int x=0;x<11;x++){
@@ -211,8 +205,32 @@ void hMsgGot(){
 void hMsgC(){
 	rFile("/memmo.txt",4);
 }
-void set(){ // handle set pause and resume function
-//prog perc
+void set(){ 
+  double x = from * 60 * 60 * 1000;
+  Serial.println(x);
+  CT = millis();
+   digitalWrite(pin, HIGH); 
+	WiFi.mode(WIFI_OFF);
+  for ( uint32_t tStart = millis();  (millis() - tStart) < x;) {
+    RemT = ((millis() - CT) / x) * 100;
+      Serial.println(RemT);
+  }
+  x = For * 60 * 60 * 1000;
+  Serial.println(x);
+  CT = millis();  
+  for ( uint32_t tStart = millis();  (millis() - tStart) < x;) {
+    RemT = ((millis() - CT) / x) * 100;
+    Serial.println(RemT);
+    digitalWrite(pin, LOW); 
+  }
+ digitalWrite(pin, HIGH); 
+  WiFi.mode(WIFI_STA);  
+  WiFi.begin(ssid, password);
+  WiFi.config(staticIP, staticIP, subnet);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+}
 }
 void hGot(){
 	Blink();
@@ -268,9 +286,6 @@ void hReportGot(){
 	  weather=(GotData=="")?"no internet":GotData;
   }
 }
-void hFromP(){
-	rFile("/FromP.html",0);
-}
 void hUpd(){
 	rFile("/Upd.html",0);
 	Serial.println("Upd");
@@ -321,16 +336,13 @@ if (server.method() != HTTP_POST) {
   	Serial.println(GotData.substring(GotData.indexOf("Check")+6,GotData.indexOf("ElectricPrice")-1));
 	Serial.println(GotData);
   	//for(int x=0;x<11;x++){Serial.print(scedule[x]);}
-	wFile(3," ");
+	wFile(2," ");
 	rFile("/Ok.html",0);	
   }
 }
 void hCss(){
 	rFile("/index.css",1);
 	Serial.println("css");
-}
-void hProgCss(){
-	rFile("/Prog.css",1);
 }
 void hSced(){
 	rFile("/Sced.js",2);
@@ -363,10 +375,8 @@ void handleRequest(){
 	server.on("/draw",hDraw);
 	server.on("/send",hSend);
  	server.on("/ref",hReportGot);
-	server.on("/fromp/",hFromP);
 	server.on("/upd/",hUpd);
 	server.on("/css",hCss);
-	server.on("/progcss",hProgCss);
 	server.on("/scd",hSced);
 	server.on("/viz",hViz);
 	server.on("/upd/a",hUpdGot);
