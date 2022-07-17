@@ -11,72 +11,84 @@
 	<h2 class="hdderWrapper">WamBo</h2></div>
 	<br>
 	<br>
+	<form action="/upd/a" method="post" onsubmit="return(check());">
 	<div align="center">
 	<p class="genericText">
-		<em><h3>Update</h3></em>
+		<input type="submit" value="UPDATE" style="font-size:20px;background-color:rgb(55, 232, 200);display:inline-block;padding:5px;border-radius:8px;mix-blend-mode: screen;color: black;height:35px;">
 	</p>
-	<form action="/upd/a" method="post">
 	<table border="3px" border-color="silver" align="center" class="genericText shadowLight">
-							<tr><td><input type="button" id="rst" value="RESET"></td><td id="day" style="text-align:center">On?</td></tr>
-							<tr><td>04_06</td><td class="sced"><input type="checkbox"  id="4_6"  name="04_06"></td></tr>
-							<tr><td>06_08</td><td class="sced"><input type="checkbox"  id="6_8" name="06_08"></td></td></tr>
-							<tr><td>08_10</td><td class="sced"><input type="checkbox"  id="8_10" name="08_10"></td></td></td></tr>
-							<tr><td>10_12</td><td class="sced"><input type="checkbox"  id="10_12" name="10_12"></td></tr>
-							<tr><td>12_14</td><td class="sced"><input type="checkbox"  id="12_14" name="12_14"></td></tr>
-							<tr><td>14_16</td><td class="sced"><input type="checkbox"  id="14_16" name="14_16"></td><td><input type="submit" value="UPDATE" id="upd" name="*upd"></td></tr>
-							<tr><td>16_18</td><td class="sced"><input type="checkbox"  id="16_18" name="16_18"></td></tr>							<tr><td>18_20</td><td class="sced"><input type="checkbox"  id="18_20" name="18_20"></td></tr>
-							<tr><td>20_22</td><td class="sced"><input type="checkbox"  id="20_22" name="20_22"></td></tr>
-							<tr><td>22_24</td><td class="sced"><input type="checkbox"  id="22_24" name="22_24"></td></tr>
-							<tr><td>24_02</td><td class="sced"><input type="checkbox"  id="24_2" name="24_02"></td></tr>
-		        </table>
-				<div class="hdderWrapper genericText shadowLight">
-				<input type="text" name="*Check" id="x" style="display:none" value="0000">
-				<input type="text" placeholder="Price per KwH" name="ElectricPrice" onchange="ud()" id="price">
-				<input type="text" placeholder="supply Ampere" name="ElectricSupply" onchange="ud()" id="suply">
-				<br>
-				<br>
-				<input type="text" id="ssid" placeholder="SSID"name="SSID" onchange="ud()"><input type="text" id="pwd"placeholder="Password" name="PWD" onchange="ud()">
-				<br>
-				<br>
-				<br>
-				<label>Reset?&nbsp;&nbsp;</label>Y:<input type="radio" name="reset" value="Yes">N:<input type="radio" name="reset" value="No" checked>
-				</div>
-	</form>
-	</div>
-		<script lang="javascript">
-			 function rst(){
-			 document.getElementById("4_6").checked=false;
-			 document.getElementById("6_8").checked=false;
-			 document.getElementById("8_10").checked=false;
-			 document.getElementById("10_12").checked=false;
-			 document.getElementById("12_14").checked=false;
-			 document.getElementById("14_16").checked=false;
-			 document.getElementById("16_18").checked=false;
-			 document.getElementById("18_20").checked=false;
-			 document.getElementById("20_22").checked=false;
-			 document.getElementById("22_24").checked=false;
-			 document.getElementById("24_2").checked=false;
-			 }
-			 document.getElementById("rst").onclick=function(){rst();};
-			 function ud(){
-				 document.getElementById("x").value="1111";
-				 var x=document.getElementById("price");
-				 var y=document.getElementById("suply");
-				 if(isNaN(parseFloat(x.value))||isNaN(parseFloat(y.value))){
-					alert("input should be a number; electricity");
-					x.value=null;
-					y.value=null;
+		<tr><td><input type="button" id="rst" value="RESET"></td><td id="day" style="text-align:center">On?</td></tr>
+		<tr><td>04_06</td><td class="sced"><input type="radio" value="on"  id="4_6"  name="04_06"><input type="radio" value="off" id="a" name="04_06" style="display:none"></td></tr>
+		<tr><td>06_08</td><td class="sced"><input type="radio" value="on"  id="6_8" name="06_08"><input type="radio" value="off" id="b" name="06_08" style="display:none"></td></tr>
+		<tr><td>08_10</td><td class="sced"><input type="radio" value="on"  id="8_10" name="08_10"><input type="radio" value="off" id="c" name="08_10" style="display:none"></td></tr>
+		<tr><td>10_12</td><td class="sced"><input type="radio" value="on"  id="10_12" name="10_12"><input type="radio" value="off" id="d" name="10_12" style="display:none"></td></tr>
+		<tr><td>12_14</td><td class="sced"><input type="radio" value="on"  id="12_14" name="12_14"><input type="radio" value="off" id="e" name="12_14" style="display:none"></td></tr>
+		<tr><td>14_16</td><td class="sced"><input type="radio" value="on"  id="14_16" name="14_16"><input type="radio" value="off" id="f" name="14_16" style="display:none"></td></tr>
+		<tr><td>16_18</td><td class="sced"><input type="radio" value="on"  id="16_18" name="16_18"><input type="radio" value="off" id="g" name="16_18" style="display:none"></td></tr>
+		<tr><td>18_20</td><td class="sced"><input type="radio" value="on"  id="18_20" name="18_20"><input type="radio" value="off" id="h" name="18_20" style="display:none"></td></tr>
+		<tr><td>20_22</td><td class="sced"><input type="radio" value="on"  id="20_22" name="20_22"><input type="radio" value="off" id="i" name="20_22" style="display:none"></td></tr>
+		<tr><td>22_24</td><td class="sced"><input type="radio" value="on"  id="22_24" name="22_24"><input type="radio" value="off" id="j" name="22_24" style="display:none"></td></tr>
+		<tr><td>24_02</td><td class="sced"><input type="radio" value="on"  id="24_2" name="24_02"><input type="radio" value="off" id="k" name="24_02" style="display:none"></td></tr>
+</table>
+<div class="hdderWrapper genericText shadowLight">
+<input type="text" name="*Check" id="x" style="display:none" value="0000">
+<input type="text" placeholder="Price per KwH" name="ElectricPrice" onchange="ud()" id="price">
+<input type="text" placeholder="supply Ampere" name="ElectricSupply" onchange="ud()" id="suply">
+<br>
+<br>
+<input type="text" id="ssid" placeholder="SSID"name="SSID" onchange="ud()"><input type="text" id="pwd"placeholder="Password" name="PWD" onchange="ud()">
+<br>
+<br>
+<br>
+<label>Reset?&nbsp;&nbsp;</label>Y:<input type="radio" value="Y" name="reset" value="Yes">N:<input type="radio" name="reset" value="N" checked>
+</div>
+</form>
+</div>
+<script lang="javascript">
+function rst(){
+document.getElementById("a").checked=true;
+document.getElementById("b").checked=true;
+document.getElementById("c").checked=true;
+document.getElementById("d").checked=true;
+document.getElementById("e").checked=true;
+document.getElementById("f").checked=true;
+document.getElementById("g").checked=true;
+document.getElementById("h").checked=true;
+document.getElementById("i").checked=true;
+document.getElementById("j").checked=true;
+document.getElementById("k").checked=true;
+}
+rst();
+var x=document.getElementById("price");
+var y=document.getElementById("suply");
+document.getElementById("rst").onclick=function(){rst();};
+function ud(){
+document.getElementById("x").value="1111";
+if(isNaN(parseFloat((x.value=='')?"0":x.value))||isNaN(parseFloat((y.value=='')?"0":y.value))){
+alert("input should be a number; electricity");
+x.value=null;
+y.value=null;
+}
+}
+var SSID_I=document.getElementById("ssid");
+var PWD_I=document.getElementById("pwd");
+function check(){
+				if(document.getElementById("x").value=="1111"){
+					if(x.value==''||y.value==''||SSID_I.value==''||PWD_I.value==''){
+						alert("incomplete input");
+						return false;
+					}
 				}
+				return true;
 			 }
-			 var SSID_I=document.getElementById("ssid");
-			 var PWD_I=document.getElementById("pwd");
-			 function x(){
-			 SSID_I.value=SSID_I.value.trim();
-			 PWD_I.value=PWD_I.value.trim();
-			 console.log(SSID_I.value+"\n"+PWD_I.value);
-			 }
-			 SSID_I.onblur=x;
-			 PWD_I.onblur=x;
-		</script>
-	</body>
+function x(){
+SSID_I.value=SSID_I.value.trim();
+PWD_I.value=PWD_I.value.trim();
+console.log(SSID_I.value+"\n"+PWD_I.value);
+}
+SSID_I.onblur=x;
+PWD_I.onblur=x;
+</script>
+</body>
+</html>
 </html>

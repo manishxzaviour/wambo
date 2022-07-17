@@ -1,9 +1,10 @@
 import scedule from '/Sced';
-var dateTime = new Date();
-document.getElementById("time").value = dateTime;
+var d = new Date();
+var date=String(d.getDate())+'-'+String((d.getMonth()<10)?'0'+String(d.getMonth()):d.getMonth())+'-'+String(d.getFullYear());
+document.getElementById("date").value=date;
 function refT() {
   var ref = String(new Date());
-  document.getElementById("time").value = ref.substring(0, 24);
+  document.getElementById("time").value = ref.substring(0,24);
 }
 setInterval(refT, 1000);
 function sendC() {

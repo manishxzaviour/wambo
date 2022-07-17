@@ -9,6 +9,7 @@
 		<supply>10</supply>
 		<savedE>2</savedE>
 		<savedM>20</savedM>
+		<weather></weather>
 		<date>14-07-2022</date>
 	</D>
 	<D>
@@ -20,6 +21,7 @@
 		<supply>11</supply>
 		<savedE>22</savedE>
 		<savedM>20</savedM>
+		<weather></weather>
 		<date>15-07-2022</date>
 	</D>
 	<D>
@@ -31,6 +33,7 @@
 		<supply>10</supply>
 		<savedE>2</savedE>
 		<savedM>20</savedM>
+		<weather></weather>
 		<date>16-07-2022</date>
 	</D>
 	<D>
@@ -42,6 +45,7 @@
 		<supply>10</supply>
 		<savedE>3</savedE>
 		<savedM>20</savedM>
+		<weather></weather>
 		<date>17-07-2022</date>
 	</D>
 	<D>
@@ -53,6 +57,7 @@
 		<supply>10</supply>
 		<savedE>20</savedE>
 		<savedM>50</savedM>
+		<weather></weather>
 		<date>18-07-2022</date>
 	</D>
 	<D>
@@ -64,6 +69,7 @@
 		<supply>10</supply>
 		<savedE>2</savedE>
 		<savedM>20</savedM>
+		<weather></weather>
 		<date>19-07-2022</date>
 	</D>
 	<D>
@@ -75,6 +81,7 @@
 		<supply>10</supply>
 		<savedE>20</savedE>
 		<savedM>100</savedM>
+		<weather></weather>
 		<date>20-07-2022</date>
 	</D>
 	<D>
@@ -86,6 +93,7 @@
 		<supply>10</supply>
 		<savedE>2</savedE>
 		<savedM>20</savedM>
+		<weather></weather>
 		<date>21-07-2022</date>
 	</D>
 	<D>
@@ -97,6 +105,7 @@
 		<supply>10</supply>
 		<savedE>2</savedE>
 		<savedM>10</savedM>
+		<weather></weather>
 		<date>22-07-2022</date>
 	</D>
 </data>

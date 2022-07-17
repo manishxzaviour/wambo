@@ -1,4 +1,4 @@
-{//header
+
 	#include <FS.h>
 	#include <ESP8266WiFi.h>
 	#include <WiFiClient.h>
@@ -6,13 +6,10 @@
 	#include <ESP8266mDNS.h>
 	#include <WiFiUdp.h>
 	#include <ArduinoOTA.h>
-}
-
-{//global var
 IPAddress staticIP(192, 168, 0, 184);
 IPAddress subnet(255, 255, 0, 0);
-String ssid     = "M 2.4G ";
-String password = "helloWorld11";
+String ssid;
+String password ;
 const char* ssid_ap   = "Wambo_ap";
 const int pin = 5 ;
 const int btn = 14;
@@ -21,9 +18,24 @@ float RemT = 100;
 double CT = millis();
 float from;
 float For;
+String date;
+String timeH;
 int T = 0; //h*24*60*60*1000+m*60*1000
+int scedule[]={0,0,0,0,0,0,0,0,0,0,0};
 String GotData;
-ESP8266WebServer server(80);}
+int EleRate;
+int EleSupply;
+String xS="<";
+String xC=">";
+String xE="</";
+String xPC="</data>";
+String weather;
+int ton=0;
+int toff=0;
+float savedE=0;
+float savedM=0;
+char xCh[][10]={"D","from","for","ton","toff","rate","supply","savedE","savedM","date","weather"};
+ESP8266WebServer server(80);
 
 void Blink(){
   digitalWrite(led,   HIGH);   
@@ -36,7 +48,8 @@ void wifi(){
 	WiFi.begin(ssid,password);
 	 while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
+    Serial.println(ssid);
+  Serial.println(password);
 	}
 	 Serial.println(WiFi.localIP());
 	 Blink();
@@ -90,16 +103,61 @@ void rFile(char* f,int a){   //file name  0,1,2,3,4 <html,css,js,xml,text>
 		server.send(200, "text/javascript", s);
 		break;
 	case 3:
-		server.send(200, "text/xml", s);
+		server.send(200, "text/xml", s+xPC);
 		break;
 	case 4:
 		server.send(200, "text/plain", s);
 		break;
   }
+  file.close();
   }
   else {
       server.send(200, "text/html", "Error: File does not exist");
   }
+}
+void wFile(int m, String d){	// write file f d 0,1,3 xml txt css js
+	switch (m){
+  case 0:
+    {
+	//save without closing root sent seperate closing root tag
+	File file=SPIFFS.open("/Data.xml", "a");
+	file.println(xS+xCh[0]+xC);
+	file.println(xS+xCh[1]+xC);file.print(from);file.print(xE+xCh[1]+xC);
+	file.println(xS+xCh[2]+xC);file.print(For);file.print(xE+xCh[2]+xC);
+	file.println(xS+xCh[3]+xC);file.print(ton);file.print(xE+xCh[3]+xC);
+	file.println(xS+xCh[4]+xC);file.print(toff);file.print(xE+xCh[4]+xC);
+	file.println(xS+xCh[5]+xC);file.print(EleRate);file.print(xE+xCh[5]+xC);
+	file.println(xS+xCh[6]+xC);file.print(EleSupply);file.print(xE+xCh[6]+xC);
+	file.println(xS+xCh[7]+xC);file.print(savedE);file.print(xE+xCh[7]+xC);
+	file.println(xS+xCh[8]+xC);file.print(savedM);file.print(xE+xCh[8]+xC);
+	file.println(xS+xCh[9]+xC);file.print(date);file.print(xE+xCh[9]+xC);
+	file.println(xS+xCh[10]+xC);file.print(weather);file.print(xE+xCh[10]+xC);
+	file.println(xE+xCh[0]+xC);
+	file.close();
+    break;}
+  case 1:
+    {File file = SPIFFS.open("/memmo.txt", "w");
+    file.print(d);
+    file.close();
+    break;}
+	case 2:
+	  {File file = SPIFFS.open("/Prog.css", "w");
+	  file.print(".fp{width:");
+	  file.print(d);
+	  file.print("%;height:100%;}");
+		break;}
+	case 3:
+	  {File file = SPIFFS.open("/Sced.js", "w");
+	  file.print("var scedule=[");
+    for(int x=0;x<11;x++){
+      file.print(scedule[x]);
+      file.print(',');
+    }
+    file.print("];");
+	  file.println("export default scedule;");
+	  file.close();
+		break;}
+	}
 }
 void hIndex(){
 	rFile("/Index.html",0);
@@ -112,14 +170,13 @@ void hIndexJs(){
 void hScedJs(){
 	rFile("/Sced.js",2);
 }
-
 void hSM(){
 	rFile("/map.html",0);
 	Serial.println("SM");
 }
 void hAbt(){
 	rFile("/abt.html",0);
-	Serial.println("abt");
+	Serial.println("abt");    
 }
 void hRaw(){
 	rFile("/Data.xml",3);
@@ -129,12 +186,33 @@ void hMsg(){
 	rFile("/Memmo.html",0);
 	Serial.println("memmo");
 }
-void hMsgGot(){ // msg got  write to a xml and view it ?
+void hMsgGot(){ 
+	if (server.method() != HTTP_POST) {
+    Serial.println(405);
+    server.send(405, "text/plain", "Method Not Allowed");
+  }
+  else {
+    Serial.println("GOT");
+    GotData = server.arg("plain");
+    rFile("/Ok.html",0);
+	//memmo=manish+%0D%0Apatil%0D%0A+++++pqrst
+	//< > . , [ ] { } ! @ # $ % ^ & * ( ) - _ + / \ ` ~
+	//%3C %3E . %2C %5B %5D %7B %7D %21 %40 %23 %24 %25 %5E %26 * %28 %29 - _ %2B %2F %5C %60 %7E
+	char to[][25]={"<",">",",","[","]","{","}","!","@","#","$","%","^","&","(",")","+","/","\\","`","~","\"","\'","=",":"};
+	char frm[][25]={"%3C","%3E","%2C","%5B","%5D","%7B","%7D","%21","%40","%23","%24","%25","%5E","%26","%28","%29","%2B","%2F","%5C","%60","%7E","%22","%27","%3D","%3A"};
+	GotData=GotData.substring(6,GotData.length());
+  GotData.replace('+',' ');
+	for(int x=0;x<25;x++){GotData.replace(frm[x],to[x]);}
+	GotData.replace("%0D%0A","\n");
+    Serial.println(GotData);
+    wFile(1,GotData);	
+  }
 }
 void hMsgC(){
 	rFile("/memmo.txt",4);
 }
 void set(){ // handle set pause and resume function
+//prog perc
 }
 void hGot(){
 	Blink();
@@ -148,11 +226,13 @@ void hGot(){
     rFile("/Ok.html",0);
     from = GotData.substring(GotData.indexOf("1=") + 2, GotData.indexOf("&")).toFloat(); //from1=00&for2=00
     For = GotData.substring(GotData.indexOf("2=") + 2, GotData.indexOf("&T")).toFloat();  //from1=0.0&for2=8.0&Time
-    // handle date as well
-    //from1=0.0&for2=8.0&t*=Fri+Jul+15+2022+14%3A11%3A57
+    //from1=0.0&for2=8.0&d=16-06-2022&t=Sat+Jul+16+2022+15%3A10%3A02
     // Fri Jul 15 2022 14:16:58 : %3A
+	date=GotData.substring(GotData.indexOf("&d=")+3,GotData.indexOf("&t"));
+	timeH=GotData.substring(GotData.length()-12,GotData.length());
+	timeH.replace("%3A",":");
     Serial.println(GotData);
-     delay(1000);
+	wFile(0," ");
     set();
   }
 }
@@ -175,8 +255,18 @@ void hSend(){
 void hDraw(){
 	rFile("/draw.js",2);
 }
-void hReportGot(){ // handle weather
-  
+void hReportGot(){ 
+  if (server.method() != HTTP_POST) {
+    Serial.println(405);
+    server.send(405, "text/plain", "Method Not Allowed");
+  }
+  else {
+    Serial.println("GOT");
+    GotData = server.arg("plain");
+    Serial.println(GotData);
+	  server.send(200,"text/plain","got weather");
+	  weather=(GotData=="")?"no internet":GotData;
+  }
 }
 void hFromP(){
 	rFile("/FromP.html",0);
@@ -185,7 +275,55 @@ void hUpd(){
 	rFile("/Upd.html",0);
 	Serial.println("Upd");
 }
-void hUpdGot(){ // upd got  js module
+void hUpdGot(){ 
+if (server.method() != HTTP_POST) {
+    Serial.println(405);
+    server.send(405, "text/plain", "Method Not Allowed");
+  }
+  else {
+    Serial.println("GOT");
+    GotData = server.arg("plain");
+	//04_06=on&06_08=on&08_10=on&10_12=on&12_14=on&14_16=on&16_18=on&18_20=on&20_22=on&22_24=on&24_02=on&*Check=1111&ElectricPrice=10&ElectricSupply=20&SSID=000&PWD=12345678&reset=N
+    char s[][12]={"04_06","06_08","08_10","10_12","12_14","14_16","16_18","18_20","20_22","22_24","24_02","*Check"};
+	for(int x=0;x<11;x++){
+		if(GotData.substring(GotData.indexOf(s[x])+6,GotData.indexOf(s[x+1])-1)=="on"){ 
+			scedule[x]=1;
+		}
+		else{scedule[x]=0;}	
+	}
+	if(GotData.substring(GotData.indexOf("reset")+6,GotData.length())=="Y"){
+		File file = SPIFFS.open("/Data.xml", "w");
+		file.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		file.println("<data>");
+		file.close();
+		Serial.println("Reset");
+	}
+	if(GotData.substring(GotData.indexOf("Check")+6,GotData.indexOf("ElectricPrice")-1)=="1111"){
+		 EleRate=GotData.substring(GotData.indexOf("Price")+6,GotData.indexOf("ElectricSupply")-1).toInt();
+		 EleSupply=GotData.substring(GotData.indexOf("Supply")+7,GotData.indexOf("SSID")-1).toInt();
+		String z=GotData.substring(GotData.indexOf("SSID")+5,GotData.indexOf("PWD")-1);
+		String w=GotData.substring(GotData.indexOf("PWD")+4,GotData.indexOf("reset")-1);
+		File file = SPIFFS.open("/const.txt", "w");
+		if(!w<8){
+			file.print("//ssid//");
+			file.print(z);
+			file.print("//pwd//");
+			file.print(w);
+			file.print("//end");
+			};
+		file.print("//EleR//");
+		file.print(EleRate);
+		file.print("//EleSuply//");
+		file.print(EleSupply);
+		file.print("//eend");
+      	file.close();
+	}
+  	Serial.println(GotData.substring(GotData.indexOf("Check")+6,GotData.indexOf("ElectricPrice")-1));
+	Serial.println(GotData);
+  	//for(int x=0;x<11;x++){Serial.print(scedule[x]);}
+	wFile(3," ");
+	rFile("/Ok.html",0);	
+  }
 }
 void hCss(){
 	rFile("/index.css",1);
@@ -210,7 +348,7 @@ void handleRequest(){
     server.begin();
 	server.on("/",hIndex);
 	server.on("/indexjs",hIndexJs);
-	server.on("/Sced",hScedJS);
+	server.on("/Sced",hScedJs);
 	server.on("/sm/",hSM);
 	server.on("/abt/",hAbt);
 	server.on("/raw/",hRaw);
@@ -224,7 +362,7 @@ void handleRequest(){
 	server.on("/SavingsData",hSavingsData);
 	server.on("/draw",hDraw);
 	server.on("/send",hSend);
-  	server.on("/ref",hReportGot);
+ 	server.on("/ref",hReportGot);
 	server.on("/fromp/",hFromP);
 	server.on("/upd/",hUpd);
 	server.on("/css",hCss);
@@ -241,6 +379,16 @@ void setup() {
 	digitalWrite(pin, HIGH); 
 	Serial.begin(115200);
 	SPIFFS.begin();
+	File file = SPIFFS.open("/const.txt", "r");
+	String s;
+  	while (file.available()){
+            s += char(file.read());
+          }
+	ssid=s.substring(s.indexOf("ssid//")+6,s.indexOf("//pwd"));
+	password=s.substring(s.indexOf("pwd//")+5,s.indexOf("//end"));
+	EleRate=s.substring(s.indexOf("EleR//")+6,s.indexOf("//EleSuply"));
+	EleSupply=s.substring(s.indexOf("EleSuply//")+10,s.indexOf("//eend"));
+  file.close();
 	if(digitalRead(btn)==HIGH){
 		ap();
 	}

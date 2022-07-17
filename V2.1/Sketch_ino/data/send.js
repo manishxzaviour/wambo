@@ -1,4 +1,3 @@
-import wetherDF from "/draw";
 function xmlD(c) {
   var xmL = new XMLHttpRequest();
   xmL.onreadystatechange = function () {
@@ -9,12 +8,5 @@ function xmlD(c) {
   xmL.open("GET", "/raw/", true);
   xmL.send();
 }
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function () {
-  if (this.readyState == 4 && this.status == 200) {
-    console.log(this.responseText);
-  }
-};
-xhttp.open("POST", "/ref", true);
-xhttp.send(wetherDF[0]);
+
 export default xmlD;

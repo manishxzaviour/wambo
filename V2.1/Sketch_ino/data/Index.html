@@ -44,7 +44,7 @@
 		</ul>
 		</div>
 		<div id="container2">
-		<form name="f1" action="/wambo" 	 onsubmit="return(check());">
+		<form name="f1" action="/wambo" method="post" onsubmit="return(check());">
 				<table id="input" border="3px" class="shadowLight">
 					<tr>
 						<th>
@@ -70,9 +70,9 @@
 				<div id="container" align="center">
 					<table border="2px" border-color="silver"style="border-style: dotted" class="genericText">
 						<tr><td>Period</td><td id="day" style="text-align:center">On?</td></tr>
-						<tr><td>4_6</td><td class="sced"><input type="checkbox" class="box" id="a"></td></tr>
-						<tr><td>6_8</td><td class="sced"><input type="checkbox" class="box" id="b"></td></tr>
-						<tr><td>8_10</td><td class="sced"><input type="checkbox" class="box" id="c"></td></tr>
+						<tr><td>04_06</td><td class="sced"><input type="checkbox" class="box" id="a"></td></tr>
+						<tr><td>06_08</td><td class="sced"><input type="checkbox" class="box" id="b"></td></tr>
+						<tr><td>08_10</td><td class="sced"><input type="checkbox" class="box" id="c"></td></tr>
 						<tr><td>10_12</td><td class="sced"><input type="checkbox" class="box" id="d"></td></tr>
 						<tr><td>12_14</td><td class="sced"><input type="checkbox" class="box" id="e"></td></tr>
 						<tr><td>14_16</td><td class="sced"><input type="checkbox" class="box" id="f"></td></tr>
@@ -80,12 +80,13 @@
 						<tr><td>18_20</td><td class="sced"><input type="checkbox" class="box" id="h"></p></td></tr>
 						<tr><td>20_22</td><td class="sced"><input type="checkbox" class="box" id="i"></td></tr>
 						<tr><td>22_24</td><td class="sced"><input type="checkbox" class="box" id="j"></td></tr>
-						<tr><td>24_2</td><td class="sced"><input type="checkbox" class="box" id="k"></p></tr>
+						<tr><td>24_02</td><td class="sced"><input type="checkbox" class="box" id="k"></p></tr>
 					</table>
 				<iframe src="/report/" title="report" height="300px" width="400px" style="border:2px dotted rgba(240,130,235); " id="rep"></iframe>
 				</div>
 				<iframe src="/fromp/" class="fromP" style="height:24px;width:400px;" id="p1"></iframe>
-				<input id="time" type="text" name="t*" class="shadowLight genericText">
+				<input id="date" type="text" name="d" style="display: none;">
+				<input id="time" name="t" type="text" class="shadowLight genericText">
 				<a href="/upd/"><image src="https://raw.githubusercontent.com/manishxzaviour/wambo/v1.3/UPD.png" id="updi" title="UPDATE" class="shadowLight"></a>	
 		</form>
 		</div>			
