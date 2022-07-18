@@ -39,8 +39,8 @@ till.onfocus = function () {
 };
 document.f1.addEventListener('submit',check);
 function Do() {
-  var slot = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"];
-  for (let i = 0; i < 11; i++) {
+  var slot = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k","l"];
+  for (let i = 0; i < 12; i++) {
     var x = document.getElementById(slot[i]);
     x.checked = Boolean(scedule[i]);
     x.disabled = true;

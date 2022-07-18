@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="/css">
 	<body>
 	<div class="hdder">
-	<h2 class="hdderWrapper">WamBo</h2></div>
+	<h2 align="center"><a href="/"class="hdderWrapper">WamBo</a></h2></div>
 	<br>
 	<br>
 	<form action="/upd/a" method="post" onsubmit="return(check());">
@@ -29,11 +29,12 @@
 		<tr><td>20_22</td><td class="sced"><input type="radio" value="on"  id="20_22" name="20_22"><input type="radio" value="off" id="i" name="20_22" style="display:none"></td></tr>
 		<tr><td>22_24</td><td class="sced"><input type="radio" value="on"  id="22_24" name="22_24"><input type="radio" value="off" id="j" name="22_24" style="display:none"></td></tr>
 		<tr><td>24_02</td><td class="sced"><input type="radio" value="on"  id="24_2" name="24_02"><input type="radio" value="off" id="k" name="24_02" style="display:none"></td></tr>
-</table>
+		<tr><td>02_04</td><td class="sced"><input type="radio" value="on"  id="2_4" name="02_04"><input type="radio" value="off" id="l" name="02_04" style="display:none"></td></tr>
+	</table>
 <div class="hdderWrapper genericText shadowLight">
 <input type="text" name="*Check" id="x" style="display:none" value="0000">
 <input type="text" placeholder="Price per KwH" name="ElectricPrice" onchange="ud()" id="price">
-<input type="text" placeholder="supply Ampere" name="ElectricSupply" onchange="ud()" id="suply">
+<input type="text" placeholder="supply V*I" name="ElectricSupply" onchange="ud()" id="suply">
 <br>
 <br>
 <input type="text" id="ssid" placeholder="SSID"name="SSID" onchange="ud()"><input type="text" id="pwd"placeholder="Password" name="PWD" onchange="ud()">
@@ -57,6 +58,7 @@ document.getElementById("h").checked=true;
 document.getElementById("i").checked=true;
 document.getElementById("j").checked=true;
 document.getElementById("k").checked=true;
+document.getElementById("l").checked=true;
 }
 rst();
 var x=document.getElementById("price");
