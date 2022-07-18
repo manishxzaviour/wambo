@@ -67,7 +67,7 @@ void wifi()
 void ap()
 {
 	WiFi.mode(WIFI_AP);
-	WiFi.softAPConfig(staticIP, staticIP, subnet);
+	WiFi.softAPConfig(staticIP, gateway, subnet);
 	WiFi.softAP(ssid_ap);
 	Serial.println("AP_mode:");
 	Serial.print(WiFi.localIP());
