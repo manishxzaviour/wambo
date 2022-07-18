@@ -3,6 +3,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
+#include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <ESP8266HTTPClient.h>
@@ -17,6 +18,8 @@ const char *ssid_ap = "Wambo_ap";
 const int pin = 5;
 const int btn = 14;
 const int led = 12;
+bool stat=true;
+bool flag=false;
 float RemT = 0;
 double CT = millis();
 float from;
@@ -200,8 +203,8 @@ void wFile(int m, String d)
 void sced(int x)
 {
     if(scedule[x]){
-			digitalWrite(pin, HIGH);
-		}else{digitalWrite(pin, LOW);}
+			stat=true;
+		}else{stat=false;}
 }
 void hIndex()
 {
@@ -457,6 +460,12 @@ void hNF()
 	server.send(404, "text/plain", "404:FNF");
 	Serial.println(404);
 }
+void hStat()
+{
+  server.send(200, "text/plain", "Stat : ");
+  server.send(200, "text/plain", String(stat));
+}
+
 void handleRequest()
 {
 	server.begin();
@@ -482,6 +491,7 @@ void handleRequest()
 	server.on("/scd", hSced);
 	server.on("/viz", hViz);
 	server.on("/upd/a", hUpdGot);
+  server.on("/stat", hStat);
 	server.onNotFound(hNF);
 }
 void setup()
@@ -531,6 +541,7 @@ void setup()
 		WiFiClient client;
 		HTTPClient http;
 		String x;
+    stat=true;
 		if (http.begin(client, "http://worldtimeapi.org/api/timezone/Asia/Kolkata"))
 		{
 			int httpCode = http.GET();
@@ -542,6 +553,7 @@ void setup()
 				x = x.substring(x.indexOf("datetime") + 22, x.indexOf("+05:30") - 10);
 				timeScedM = x.substring(0, 3).toInt() * 60 + x.substring(3, 5).toInt();
 				Serial.println(timeScedM);
+        flag=true;
 			}
 			else
 			{
@@ -566,10 +578,14 @@ void loop()
 {
 	server.handleClient();
 	ArduinoOTA.handle();
-	int y=timeScedM+millis()/(1000*60);
-	for(int x=0;x<13;x++){
-		if((y-scedP[x])<120&&(y-scedP[x])>0){
-			sced(x);
-			}
-	}
+	if(flag){
+	  int y=timeScedM+millis()/(1000*60);
+  for(int x=0;x<13;x++){
+    if((y-scedP[x])<120&&(y-scedP[x])>0){
+      sced(x);
+      }
+  }}
+ if(stat){
+ digitalWrite(pin,HIGH);}
+ else{digitalWrite(pin,LOW);}
 }
