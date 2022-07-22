@@ -3,14 +3,13 @@
 	<head>
 		<title>wambo</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="./index.css">
-		<script type="module" src="./index.js" async></script>
-		<script type="module" src="./Sced.js" async></script>
+		<link rel="stylesheet" type="text/css" href="/css">
+		<script type="module" src="/indexjs" async></script>
+		<script type="module" src="/Sced" async></script>
 		<style>
 			#titlle {float:right;margin:0px 10px;background-color:rgba(255,185,25,80%);border-radius:15px;padding:7px;}
 			#titlle li{display:inline-block; padding:0px 5px;padding-top:4px;}
 			#msg_i{height:20px;width:37px;}
-			#logo{height:55px;width:55px;}
 			#updi{height:28px;width:30px ;float:right;background-color:rgb(240,240,255);border:2px dotted gray;border-radius:5px;}
 			#subt{background-color:rgba(68,255,200,35%);margin-top:0px;margin-bottom:0px;padding:15px}
 			#subt li{display:inline-block; padding:8px;background-color:rgba(25,255,255,95%);border-radius:15px;border:3px solid rgba(255,160,30,35%) ; font-size:17px;}
@@ -27,19 +26,19 @@
 	</head>
 	<body id="bdy">
 		<div class="hdder">
-			<h2 align="center"><a href="./index.html"class="hdderWrapper">WamBo</a></h2>
+			<h2 align="center"><a href="/"class="hdderWrapper">WamBo</a></h2>
 			<ul id="titlle" class="shadowLight">
-					<li id="mp"><a href="./map.html"style="width:37px;height:20px;position:relative;top:-20px">SiteMap</a></li>
-					<li><a href='./abt.html'><image src="https://raw.githubusercontent.com/manishxzaviour/wambo/v1.3/LOGO.png" id="logo"  title="logo"></a></li>
+				<li id="mp"><a href="/sm/"style="font-size: 20px;" class="hdderWrapper">SM</a></li>
+				<li><a href='/abt/' class="hdderWrapper" style="font-size: 20px;">ABT</a></li>
 			</ul>
 		</div>
 		<div id="wrapper">
 		<ul id="subt">
-				<li class="shadowLight"><a id="msg" href="./memmo.html"><image src	="https://raw.githubusercontent.com/manishxzaviour/wambo/v1.3/MSGG.png" id="msg_i" title="stored memo"/></a></li>
-		</ul>
+			<li class="shadowLight"><a id="msg" href="/msg/" class="hdderWrapper" style="font-size: 20px;">MSG</a></li>
+			</ul>
 		</div>
 		<div id="container2">
-		<form name="f1" action="/wambo" 	 onsubmit="return(check());">
+		<form name="f1" action="/wambo"   method="POST"	 onsubmit="return(check());">
 				<table id="input" border="3px" class="shadowLight">
 					<tr>
 						<th>
@@ -65,9 +64,9 @@
 				<div id="container" align="center">
 					<table border="2px" border-color="silver"style="border-style: dotted" class="genericText">
 						<tr><td>Period</td><td id="day" style="text-align:center">On?</td></tr>
-						<tr><td>4_6</td><td class="sced"><input type="checkbox" class="box" id="a"></td></tr>
-						<tr><td>6_8</td><td class="sced"><input type="checkbox" class="box" id="b"></td></tr>
-						<tr><td>8_10</td><td class="sced"><input type="checkbox" class="box" id="c"></td></tr>
+						<tr><td>04_06</td><td class="sced"><input type="checkbox" class="box" id="a"></td></tr>
+						<tr><td>06_08</td><td class="sced"><input type="checkbox" class="box" id="b"></td></tr>
+						<tr><td>08_10</td><td class="sced"><input type="checkbox" class="box" id="c"></td></tr>
 						<tr><td>10_12</td><td class="sced"><input type="checkbox" class="box" id="d"></td></tr>
 						<tr><td>12_14</td><td class="sced"><input type="checkbox" class="box" id="e"></td></tr>
 						<tr><td>14_16</td><td class="sced"><input type="checkbox" class="box" id="f"></td></tr>
@@ -75,14 +74,14 @@
 						<tr><td>18_20</td><td class="sced"><input type="checkbox" class="box" id="h"></p></td></tr>
 						<tr><td>20_22</td><td class="sced"><input type="checkbox" class="box" id="i"></td></tr>
 						<tr><td>22_24</td><td class="sced"><input type="checkbox" class="box" id="j"></td></tr>
-						<tr><td>24_2</td><td class="sced"><input type="checkbox" class="box" id="k"></p></tr>
-						<tr><td>2_4</td><td class="sced"><input type="checkbox" class="box" id="l"></p></tr>
+						<tr><td>24_02</td><td class="sced"><input type="checkbox" class="box" id="k"></p></tr>
+						<tr><td>02_04</td><td class="sced"><input type="checkbox" class="box" id="l"></p></tr>
 					</table>
 				</div>
 				<input id="d" type="text" name="d" style="display: none;">
 				<input id="time" type="text" class="shadowLight genericText" disabled="true">
-				<a href="./upd.html"><image src="https://raw.githubusercontent.com/manishxzaviour/wambo/v1.3/UPD.png" id="updi" title="UPDATE" class="shadowLight"></a>	
-		</form>
+				<a href="/upd/" id="updi" class="hdderWrapper" style="height: 25px;">^</a>	
+				</form>
 		</div>			
 	</body>
 </html>

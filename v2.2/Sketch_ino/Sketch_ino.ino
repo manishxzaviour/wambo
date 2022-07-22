@@ -1,13 +1,12 @@
 
 #include <FS.h>
 #include <ESP8266WiFi.h>
-#include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
-IPAddress staticIP(192, 168, 0, 184); // static ip creating problems
-IPAddress subnet(255, 255, 0, 0);
-IPAddress gateway(192, 168, 0, 1);
-IPAddress primaryDNS(8, 8, 8, 8);
+  IPAddress staticIP(192, 168, 0, 184); // static ip creating problems
+  IPAddress subnet(255, 255, 0, 0);
+  IPAddress gateway(192, 168, 0, 1);
+  IPAddress primaryDNS(8, 8, 8, 8);
 String ssid;
 String password;
 const char *ssid_ap = "Wambo_ap";
@@ -271,18 +270,8 @@ void hUpdGot()
 				scedule[x] = 0;
 			}
 		}
-		if (GotData.substring(GotData.indexOf("reset") + 6, GotData.length()) == "Y")
-		{
-			File file = SPIFFS.open("/Data.xml", "w");
-			file.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			file.println("<data>");
-			file.close();
-			Serial.println("Reset");
-		}
 		if (GotData.substring(GotData.indexOf("Check") + 6, GotData.indexOf("ElectricPrice") - 1) == "1111")
 		{
-			EleRate = GotData.substring(GotData.indexOf("Price") + 6, GotData.indexOf("ElectricSupply") - 1).toInt();
-			EleSupply = GotData.substring(GotData.indexOf("Supply") + 7, GotData.indexOf("SSID") - 1).toInt();
 			String z = GotData.substring(GotData.indexOf("SSID") + 5, GotData.indexOf("PWD") - 1);
 			String w = GotData.substring(GotData.indexOf("PWD") + 4, GotData.indexOf("reset") - 1);
 			File file = SPIFFS.open("/const.txt", "w");
@@ -294,11 +283,6 @@ void hUpdGot()
 				file.print(w);
 				file.print("//end");
 			};
-			file.print("//EleR//");
-			file.print(EleRate);
-			file.print("//EleSuply//");
-			file.print(EleSupply);
-			file.print("//eend");
 			file.close();
 		}
 		Serial.println(GotData.substring(GotData.indexOf("Check") + 6, GotData.indexOf("ElectricPrice") - 1));
@@ -325,11 +309,9 @@ void hNF()
 }
 void hStat()
 {
-  server.send(200, "text/plain", "Stat : ");
-  if(stat){server.send(200, "text/plain", "on");}
-  else{server.send(200, "text/plain", "off");}
+  if(stat){server.send(200, "text/plain", "Stat : on");}
+  else{server.send(200, "text/plain", "Stat : off");}
 }
-
 void handleRequest()
 {
 	server.begin();
@@ -346,7 +328,7 @@ void handleRequest()
 	server.on("/css", hCss);
 	server.on("/scd", hSced);
 	server.on("/upd/a", hUpdGot);
-    server.on("/stat", hStat);
+  server.on("/stat", hStat);
 	server.onNotFound(hNF);
 }
 void setup()
@@ -425,12 +407,10 @@ void setup()
   }
   Serial.println(" ");
 	handleRequest();
-	ota();
 }
 void loop()
 {
 	server.handleClient();
-	ArduinoOTA.handle();
 	if(flag){
 	  int y=timeScedM+millis()/(1000*60);
   for(int x=0;x<13;x++){

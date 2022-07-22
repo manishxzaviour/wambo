@@ -1,4 +1,4 @@
-import scedule from './Sced.js';
+import scedule from '/Sced';
 var d = new Date();
 var date=String(d.getDate())+'-'+String((d.getMonth()<10)?'0'+String(d.getMonth()):d.getMonth())+'-'+String(d.getFullYear());
 document.getElementById("d").value=date;
