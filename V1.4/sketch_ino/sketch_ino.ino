@@ -5,10 +5,10 @@
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
-const char* ssid     = "M 2.4G ";
-const char* password = "helloWorld11";
+const char* ssid     = "wifi ";
+const char* password = "password";
 const char* ssid_ap     = "Wambo_ap";
-const char* password_ap = "244466666";
+const char* password_ap = "password";
 const int pin = 5 ;
 float RemT = 100;
 // Current time
